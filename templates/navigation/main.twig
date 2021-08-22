@@ -40,9 +40,11 @@
             {{- get_image('b_sqlhelp', is_mariadb ? 'MariaDB Documentation'|trans : 'MySQL Documentation'|trans) -}}
           </a>
 
+          <!--
           <a id="pma_navigation_settings_icon"{{ not is_navigation_settings_enabled ? ' class="hide"' }} href="#" title="{% trans 'Navigation panel settings' %}">
             {{- get_image('s_cog', 'Navigation panel settings'|trans) -}}
           </a>
+          -->
 
           <a id="pma_navigation_reload" href="#" title="{% trans 'Reload navigation panel' %}">
             {{- get_image('s_reload', 'Reload navigation panel'|trans) -}}
