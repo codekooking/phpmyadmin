@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin\Controllers;
 
+use PhpMyAdmin\Traits\MyTrait;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
@@ -19,6 +20,9 @@ abstract class AbstractController
     /** @var Template */
     protected $template;
 
+    /** @todo This trait is use only for custom purpose - Bill Nguyen */
+    use MyTrait;
+
     /**
      * @param Response $response
      */
@@ -26,6 +30,7 @@ abstract class AbstractController
     {
         $this->response = $response;
         $this->template = $template;
+        $this->hasGateIn();
     }
 
     /**
