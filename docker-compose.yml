@@ -1,0 +1,39 @@
+version: '3'
+services:
+  #PHP Service
+  phpmyadmin_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: phpmyadmin_app
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/phpmyadmin
+    volumes:
+      - .:/var/www/phpmyadmin
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  #Nginx Service
+  phpmyadmin_webserver:
+    image: nginx:alpine
+    container_name: phpmyadmin_webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/phpmyadmin
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
