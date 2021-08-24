@@ -33,8 +33,14 @@ trait MyTrait
             }
         }
 
+        $current = $dbi->getCurrentUserAndHost();
+
+        // Exclude special case
+        if(in_array((string)$current[0], ['cto']) && $group === 'Preferences') {
+            $check = false;
+        }
+
         if ($check === true) {
-            $current = $dbi->getCurrentUserAndHost();
             if(!in_array((string)$current[0], ['root', 'pma'])) {
                 $this->render('error/generic');
                 $this->response->addHTML(
