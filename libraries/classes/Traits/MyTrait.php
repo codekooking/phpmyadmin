@@ -47,7 +47,6 @@ trait MyTrait
                     }
                     break;
                 default:
-                    $check = true;
                     break;
             }
         }
