@@ -36,8 +36,20 @@ trait MyTrait
         $current = $dbi->getCurrentUserAndHost();
 
         // Exclude special case
-        if(in_array((string)$current[0], ['cto']) && $group === 'Preferences') {
-            $check = false;
+        if(in_array((string)$current[0], ['cto', 'billtest'])) {
+            switch ($group) {
+                case 'Preferences':
+                    $check = false;
+                    break;
+                case 'Server':
+                    if($controller === 'Privileges') {
+                        $check = false;
+                    }
+                    break;
+                default:
+                    $check = true;
+                    break;
+            }
         }
 
         if ($check === true) {
